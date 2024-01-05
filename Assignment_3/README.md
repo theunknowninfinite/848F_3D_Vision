@@ -10,6 +10,7 @@ You can run the code for part 1 with:
 ```bash
 python main.py --config-name=box
 ```
+
 The code renders a spiral sequence of the volume in `images/part_1.gif`.
 
 ##  2. Optimizing a basic implicit volume

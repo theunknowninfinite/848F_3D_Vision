@@ -114,5 +114,7 @@ python -m render_generic --render torus
 
 ## Credits
 [848F-Assignment 1](https://github.com/848f-3DVision/assignment1) for parts readme file and starter code.
+
 Pytorch 3D documentation
+
 [Torus Equations](https://mathworld.wolfram.com/Torus.html)

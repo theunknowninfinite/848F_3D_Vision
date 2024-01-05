@@ -57,14 +57,16 @@ Outputs are saved under `/output_images/point`
 The gifs are automatically made and seved for every 50 iterations of program being run.
 
 ### 2.3. Image to mesh (20 points)
-In this subsection, we will define a neural network to decode mesh.
-Similar as above, define the decoder network [here](https://github.com/848f-3DVision/assignment2/blob/main/model.py#L177) in `model.py` file, then reference your decoder [here](https://github.com/848f-3DVision/assignment2/blob/main/model.py#L220) in `model.py` file
+
+<!-- In this subsection, we will define a neural network to decode mesh.
+
+Similar as above, define the decoder network [here](https://github.com/848f-3DVision/assignment2/blob/main/model.py#L177) in `model.py` file, then reference your decoder [here](https://github.com/848f-3DVision/assignment2/blob/main/model.py#L220) in `model.py` file -->
 
 Run the file `python train_model.py --type 'mesh'`, to train single view to mesh pipeline.
 The tuned hyperparameters are **N_points = 5000 iterations = 10000 batch size=1 Num_workers=4 w_smooth=1 w_chamfer=1**.
 
 After trained, visualize the input RGB, ground truth mesh and predicted mesh in `eval_model.py` file using:
-`python eval_model.py --type 'mesh' --load_checkpoint` with batch size as 1 and n_points as 5000.
+`python eval_model.py -h-type 'mesh' --load_checkpoint` with batch size as 1 and n_points as 5000.
 
 Outputs are saved under `/output_images/mesh`
 The gifs are automatically made and seved for every 50 iterations of program being run.
@@ -82,6 +84,6 @@ The interpretation has been explained in the webpage attached.
 
 1. Only the outputs used in the webpage are attached to the code to reduce size of package.
 2. Ignore warnings about depricated functions.
-3. THe webpage has been submitted in a seperate zip along with the code.
+3. Te webpage has been submitted in a seperate zip along with the code.
 4. The input image, ground truth and predicted values are automatically saved.
 5. Define path in  `dataset_location.py` according to windows or linux host being hosted as the file path automatically changes depends on that.
