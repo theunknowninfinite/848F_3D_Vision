@@ -84,6 +84,6 @@ The interpretation has been explained in the webpage attached.
 
 1. Only the outputs used in the webpage are attached to the code to reduce size of package.
 2. Ignore warnings about depricated functions.
-3. Te webpage has been submitted in a seperate zip along with the code.
-4. The input image, ground truth and predicted values are automatically saved.
-5. Define path in  `dataset_location.py` according to windows or linux host being hosted as the file path automatically changes depends on that.
+3. The input image, ground truth and predicted values are automatically saved.
+4. Define path in  `dataset_location.py` according to windows or linux host being hosted as the file path automatically changes depends on that.
+5. The webpage that is the report can be found under the reports folder.

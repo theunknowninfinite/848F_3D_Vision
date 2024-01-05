@@ -1,4 +1,4 @@
-# Course Assignments Repository
+# Course Assignments Repository for CMSC 848F
 
 This repository contains the assignments completed for CMSC848F at the University of Maryland College Park. Each assignment is organized in its own directory, with a separate README file providing details about the assignment.
 

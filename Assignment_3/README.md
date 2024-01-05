@@ -38,3 +38,4 @@ After training, a spiral rendering will be written to `images/part_3.gif`.
 ##  Note
 
 1. Sometimes the NeRF output can be blank.If that happens, killing and rerunning the program will give a output.
+2. The webpage that is the report can be found under the reports folder.

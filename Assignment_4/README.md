@@ -27,3 +27,6 @@ Download zip file (~2GB) from https://drive.google.com/file/d/1wXOgwM_rrEYJfelzu
 
 ## Q3. Robustness Analysis (20 points)
 The instructions to check noise or effects of number of points sampled per object are described in the above sections for segmentation and classification repectively.ALl outputs are stored under outputs/seg or outputs/cls.
+
+## Note
+1. The webpage that is the report can be found under the reports folder.
