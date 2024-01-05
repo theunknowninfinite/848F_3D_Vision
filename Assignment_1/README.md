@@ -32,7 +32,8 @@ Other miscellaneous packages that you will need can be installed using the
 
 Here, the renderer is abstracted using the `get_mesh_renderer` wrapper function in `utils.py`.
 The code to render the mesh can be run by:
-```python render_mesh.py
+```bash
+python render_mesh.py
 ```
 
 ## 1. Practicing with Cameras
@@ -40,45 +41,53 @@ The code to render the mesh can be run by:
 ### 1.1. 360-degree Renders
 
 The code to render the mesh can be run by:
-```python render_360.py
+```bash
+python render_360.py
 ```
 ### 1.2 Re-creating the Dolly Zoom
 
 The code to render the mesh can be run by:
-```python dolly_zoom.py
+```bash
+python dolly_zoom.py
 ```
 
 ## 2. Practicing with Meshes
 
 The code to render the mesh can be run by:
-```python color_change.py
+```bash
+python color_change.py
 ```
 ### 2.1 Constructing a Tetrahedron
 
 The code to render the mesh can be run by:
-```python render_tetra.py
+```bash
+python render_tetra.py
 ```
 ### 2.2 Constructing a Cube
 
 The code to render the mesh can be run by:
-```python render_cube.py
+```bash
+python render_cube.py
 ```
 
 ## 3. Re-texturing a mesh
 
 The code to render the mesh can be run by:
-```python color_change.py
+```bash
+python color_change.py
 ```
 ## 4. Camera Transformations
 The code to render the mesh can be run by:
-```python camera_transforms.py
+```bash
+python camera_transforms.py
 ```
 ## 5. Rendering Generic 3D Representations
 
 ### 5.1 Rendering Point Clouds from RGB-D Images
 
 The code to render the point cloud 1 can be run by:
-```python -m render_generic --render rgbd1
+```bash
+python -m render_generic --render rgbd1
 ```
 For rendering point cloud 2 and point cloud union,
 change the flag `-- render` to `rgbd2` or `rgbdunion`.
@@ -86,12 +95,14 @@ change the flag `-- render` to `rgbd2` or `rgbdunion`.
 ### 5.2 Parametric Functions
 
 The code to render the point cloud can be run by:
-```python -m render_generic --render toruspts
+```bash
+python -m render_generic --render toruspts
 ```
 
 ### 5.3 Implicit Surfaces
 The code to render the mesh can be run by:
-```python -m render_generic --render torus
+```bash
+python -m render_generic --render torus
 ```
 ## Additional Arguments
 
