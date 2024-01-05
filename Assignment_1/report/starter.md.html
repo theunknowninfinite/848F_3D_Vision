@@ -1,0 +1,157 @@
+                    <meta charset="utf-8" emacsmode="-*- markdown -*">
+                            **Assignment 1 : Rendering Basics with Pytorch3D**
+                            Suriya Suresh
+
+Rendering the First Mesh
+------------------------
+![Output of First Mesh]("../output_images/cow_render.jpg")
+
+Practicing with Camera
+================
+360 degree Renders
+------------------------
+
+![360 View of Cow]("../output_images/cow.gif")
+
+The camera was kept at a distance of 3 units and the azimuth was divided into 100 points between 0 and 360 Degrees.
+
+Dolly Zoom
+------------------------
+![Dolly Zoom using starting distance as 60 units]("../output_images/dolly.gif")
+
+Formula for Determing the Dolly Effect
+\begin{equation}
+ \tan{ \frac{FOV}{2}}= \frac{Width}{Distance}
+\end{equation}
+
+Since we need width to be constant for the dolly effect, we take the ratio of the intial distance and the next distance the camera has to be placed at.
+With the FOV being known, we can find the next distance of the camera.
+
+
+Practicing With Meshes
+===============
+Tetrahedron
+------------------------
+![Tetrahedron]("../output_images/tetra_gif.gif")
+
+It has 4 Vertices and 4 faces.
+
+Cube
+------------------------
+
+![Cube]("../output_images/cube_gif.gif")
+
+It has 8 vertices and 12 faces (2 triangle faces per cube face).
+
+
+Retexturing Meshes
+==============
+
+![Retextured Mesh]("../output_images/color_change_gif.gif")
+
+Red and green were mixed to form the gif above.
+
+Red=[1,0,0]
+
+Green=[0,1,0]
+
+Camera Transforms
+===============
+
+![Original Image]("../output_images/transform_cow.jpg")
+
+The original postion of the mesh is shown above.
+
+![Postion One]("../output_images/transform_cow_1.jpg")
+
+**The mesh was rotated 90 degrees along Z axis.**
+
+The  R_relative=[[0,-1, 0], [1, 0, 0], [0, 0, 1]] and T_relative=[0, 0, 0] were taken.
+
+![Postion Two]("../output_images/transform_cow_2.jpg")
+
+**The mesh moved along +Z axis 2 units.**
+
+The
+R_relative=[[1,0,0], [0,1,0], [0, 0, 1]] and
+T_relative=[0, 0, 2] were taken.
+
+![Postion Three]("../output_images/transform_cow_3.jpg")
+
+**The mesh moved along +X axis 0.3 units and -Z axis 0.25 units.**
+
+The
+R_relative=[[1,0,0], [0,1,0], [0, 0, 1]]
+T_relative=[0.3,0,-0.25] were taken.
+
+
+![Postion Four]("../output_images/transform_cow_4.jpg")
+
+**The mesh was moved along +X axis 3 units and along +Z axis 3 units. Finally rotated 90 degrees anticlockwise along Y axis.**
+
+The
+R_relative=[[0,0,-1], [0,1,0], [1,0,0]]
+T_relative=[3, 0, 3] were taken.
+
+Rendering 3-D representations
+=====================
+
+Rendering RGBD Clouds from Pictures
+------------------------
+
+![Point Cloud One]("../output_images/pt1.gif" =100x20) ![Point Cloud 2]("../output_images/pt2.gif" =100x20)![Union of Point Clouds]("../output_images/ptunion.gif" =100x20)
+
+The direction of the axis has to be passed to renderer as the output is inverted without flipping the y axis.
+
+Parametric Functions
+------------------------
+
+![Torus with 200 Points Sampled]("../output_images/toruspts.gif")![Torus with 1000 Points Sampled]("../output_images/toruspts_1000.gif")
+
+\begin{equation}
+x( \theta,\phi)=(R+r \cos{\theta})\cos{\phi}
+\end{equation}
+\begin{equation}
+y( \theta,\phi)=(R+r \cos{\theta})\sin{\phi}
+\end{equation}
+\begin{equation}
+z( \theta,\phi)=r\cos{\phi}; \theta,\phi \in [0,2\pi]
+\end{equation}
+
+were the equations used to model the torus.
+Outer Radius was taken 3 and inner radius as 2 units.
+The torus was sampled with 200 and 1000 points
+
+
+Implicit Functions
+------------------------
+
+![Torus Using Implicit Function]("../output_images/torus.gif")
+
+\begin{equation}
+f(x,y,z)= (x^{2}+y^{2}+z^{2}+R^{2}+r^{2})-4R^{2}(x^{2}+y^{2})=0
+\end{equation}
+
+was the equation used.The outer radius was taken as 4 units and inner radius as 2.5 units.
+
+**Mesh vs Point Clouds**
+
++ Rendering Point Clouds are faster than meshes but if the points sampled are increased to a large number, point clouds also slow down significantly.
++ The quality of meshes are better compared to point clouds as the surface generated is smoother. For a more cohesive surface in point cloud rendering, the points sampled would need to be high.
++ Meshes are easier to use for post processing as it can opened in many applications.Points clouds have their use in real-world applcaitions but are not as easy to post-process after rendering them.
++ With respect to the programs used here, the GPU memory use was similar for both rendering meshes and point clouds.
++ The rendering of meshes captures the general surface texture but the finer details are captured more in point clouds.
++ Meshes look more appealing to the general user comapred to point clouds.
+
+Credits
+================
+[848F-Assignment 1](https://github.com/848f-3DVision/assignment1) for parts readme file and starter code.
+
+Pytorch 3D documentation
+
+[Torus Equations](https://mathworld.wolfram.com/Torus.html)
+
+
+
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

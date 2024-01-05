@@ -1,0 +1,220 @@
+                    <meta charset="utf-8" emacsmode="-*- markdown -*">
+                            **Assignment 4 : Point Classification and Segmentation**
+                            Suriya Suresh
+
+
+Classification Model
+================
+Test Accuracy
+------------------------
+The average test accuracy for the model is 95.17 percent.
+
+
+Visualization
+------------------------
+(###) Successful Cases
+
+Object | GT | Predicted
+---- |:----:| ----:
+![Class 0]("../output_images/0_0.gif") |  0   | 0
+![Class 1]("../output_images/1_1.gif") |  1   | 1
+![Class 2]("../output_images/2_2.gif") |  2   | 2
+
+(###) Failure Cases
+
+Object | GT | Predicted
+---- |:----:| ----:
+![Example 1]("../output_images/0_2.gif") |  0   | 2
+![Example 2]("../output_images/1_2.gif") |  1   | 2
+![Example 3]("../output_images/2_1.gif") |  2   | 1
+
+
+The chair and the vase have characteristics of a lamp, that is being tall and the vase having a structure similar to a lamp. This seems to have confused the model and got
+misclassified.The vase is classified as a lamp most likely to the model being confused as it looks similar to a lamp. The model struggles when the objects seem to have unusual
+or ambiguous shapes.To conclude, we can ascertain the model tends to bias towards a specific class when it fails to predict the class correctly.
+
+Segmentation Model
+===============
+Test Accuracy
+------------------------
+The average accuracy is 85 percent.
+
+
+Visualization
+------------------------
+
+(###) Successful Cases
+
+The threshold was taken as accuracy greater than 89 percent.
+Object Segmentation GT | Predicted Segmentation | Sample Accuracy
+---- |:----:| ----:
+![Example 1]("../output_images/19.gif") |  ![Example 1]("../output_images/19p.gif")   | 96.17 percent
+![Example 2]("../output_images/298.gif") |  ![Example 2]("../output_images/298p.gif")   | 91.27 percent
+![Example 3]("../output_images/508.gif") |  ![Example 3]("../output_images/508p.gif")   | 94.20 percent
+
+
+(###) Failure Cases
+
+The threshold was taken as accuracy less than 70 percent.
+
+Object Segmentation GT | Predicted Segmentation | Sample Accuracy
+---- |:----:| ----:
+![Example 1]("../output_images/26.gif")  |![Example 1]("../output_images/26p.gif")|  47.71 percent
+![Example 2]("../output_images/392.gif") |![Example 2]("../output_images/392p.gif") | 62.30 percent
+![Example 3]("../output_images/311.gif") | ![Example 3]("../output_images/311p.gif")|68.92 percent
+
+
+The model is able to distinguish parts of the chairs/sofas to a extent successfully. We can see the accuracy of the segmentation drops when
+the boundaries of the various parts of the sofa/chairs are not clearly defined.In the case of successful
+segmentation we can see that the chairs have clear boundaries for parts of the chair.
+
+
+Robustness Analysis
+================
+
+Num_Points
+------------------------
+For this, the number of points sampled per object were reduced and the model was tested on it. The model used for the previous tasks was used as such, it was trained with 10000 points sampled
+per object.
+
+The number of points choosen was 10000,5000,1000,100,50.
+
+### Classification Results for Num_Points
+
+Two cases are shown, one case where the object class was predicted corectly and the other where it was not.
+
+(###)   Successful Case
+
+Object | Predicted Class | GT Class
+---- |:----:| ----:
+![Example 1]("../output_images/c50.gif")  | 0 | 0
+![Example 1]("../output_images/c100.gif")  | 0 | 0
+![Example 1]("../output_images/c1000.gif")  | 0 | 0
+![Example 1]("../output_images/c5000.gif")  | 0 | 0
+![Example 1]("../output_images/c10000.gif")  | 0 | 0
+
+(###) Failure Case
+
+
+Object | Predicted Class | GT Class
+---- |:----:| ----:
+![Example 2]("../output_images/cw50.gif")  |  0   | 2
+![Example 2]("../output_images/cw100.gif")  |  0   | 2
+![Example 2]("../output_images/cw1000.gif")  |  0   | 2
+![Example 2]("../output_images/cw5000.gif")  |  0   | 2
+![Example 2]("../output_images/cw10000.gif")  |  0   | 2
+
+
+(###) Overall Accuracy
+
+num_points | Accuracy
+---- |:----:| ----:
+50| 90 percent
+100| 93.28 percent
+1000| 94.54 percent
+5000| 95.07 percent
+10000| 95.17 percent
+
+As we can see, the model is able to handle the reduction in the number of points and still classify the object correctly.
+The model is robust to lower sample points despite being trained on a much higher numer of points.The accuracy drop rate is not
+too rapid and shows the model. This is further illustrated in the failure case of class prediction that the model consistently predicts the same wrong class regardless
+of the number of points sampled.
+
+### Segmentation Results for Num_Points
+
+Only one object case was taken and the results of the segmentation were shown for the same along with GT segmentation.
+
+Object Segmentation GT | Predicted Segmentation | Sample Accuracy
+---- |:----:| ----:
+![50 Points]("../output_images/50s.gif")  |![50 Points]("../output_images/50sp.gif")|  80.23 percent
+![100 Points]("../output_images/100s.gif")  |![100 Points]("../output_images/100sp.gif")|  87.65 percent
+![1000 Points]("../output_images/1000s.gif")  |![1000 Points]("../output_images/1000sp.gif")|  91.23 percent
+![5000 Points]("../output_images/5000s.gif")  |![5000 Points]("../output_images/5000sp.gif")|  92.71 percent
+![10000 Points]("../output_images/10000s.gif")  |![10000 Points]("../output_images/10000sp.gif")|  92.71 percent
+
+(###) Overall Accuracy
+
+num_points | Accuracy
+---- |:----:| ----:
+50| 79.59  percent
+100| 82.50 percent
+1000| 85.45 percent
+5000| 85.72 percent
+10000| 85.77 percent
+
+As we can see for the example case, the accuracy of segmentation drops as the number of points sampled is reduced, But the drop is low and shows that the model is able
+to segment the object with lower number of points in specific cases. If we look at the overall drop in accuracy, the accuracy drops but not as much as expected. This shows that the
+model is robust to inputs of lower points sampled per object. The results may improve with better hyperparameter tuning and more training epcohs.
+
+
+
+Noise
+------------------------
+Gaussian noise with a mean of zero and varying standard deviation values of 0.01,0.05,0.1,0.5 and 1 were passed.The model used for the previous tasks was used as such.
+The code used was noise=(torch.randn(test_dataloader.dataset.data.size()) * std_dev + mean)`.
+
+### Classification Results for Noise
+
+Two object cases are shown.
+
+STD | Object and Predicted Class | GT Class
+---- |:----:| ----:
+0.01| ![Predicted Class 0 ]("../output_images/c0.01.gif")  ![Predicted Class 1 ]("../output_images/cc0.01.gif")  | 0,1
+0.05| ![Predicted Class 0 ]("../output_images/c0.05.gif")  ![Predicted Class 1 ]("../output_images/cc0.05.gif")  | 0,1
+0.1| ![Predicted Class 0 ]("../output_images/c0.1.gif")  ![Predicted Class 1 ]("../output_images/cc0.1.gif")  | 0,1
+0.5| ![Predicted Class 2 ]("../output_images/c0.5.gif")  ![Predicted Class 2 ]("../output_images/cc0.5.gif")  | 0,1
+1| ![Predicted Class 2 ]("../output_images/c1.gif")  ![Predicted Class 2 ]("../output_images/cc1.gif")  | 0,1
+
+(###) Overall Accuracy
+
+STD | Accuracy
+---- |:----:| ----:
+0.01| 94.5  percent
+0.05| 94.12 percent
+0.1| 90.87 percent
+0.5| 41.24 percent
+1| 25.24 percent
+
+We can see that the model is able to ignore noise upto a certain extent and the prediction accuracy does not drop much.But after that, accuracy
+drops by more than 50 percent.This also shows the model has a bias towards prediction of class 2 as for SRD of 0.5 and 1, where the object is not completely
+visible, the model predicts class 2. We can conclude when the model is uncertain of the object, it tends to predict class 2. This bias can afect classification
+when generaliziing the model.
+
+### Segmentation Results for Noise
+
+STD |  Predicted Segmentation | Sample Accuracy
+---- | :----: | ----:
+0.01|  ![ ]("../output_images/s0.01.gif")  | 92.19
+0.05|  ![ ]("../output_images/s0.05.gif")  | 85.41
+0.1| ![]("../output_images/s0.1.gif")  | 59.52
+0.5|  ![]("../output_images/s0.5.gif")  | 33.74
+1|  ![]("../output_images/s1.gif")  | 32.32
+
+(###) Overall Accuracy
+
+STD | Accuracy
+---- |:----:| ----:
+0.01| 85.3  percent
+0.05| 80.9 percent
+0.1| 67.32 percent
+0.5| 40.5 percent
+1| 39.60 percent
+
+We can see that the model is robust to a certain extent of noise but however after that the accuracy drops drastically till a point, where adding more noise does
+not affect accuracy much at all as shown in the table and in the case study for one object. This also shows that too much noise can affect the model's
+performance to a great extent.
+Credits
+================
+[848F-Assignment 4](https://github.com/848f-3DVision/assignment4) for parts of readme file ,starter code
+
+Pytorch 3D documentation
+
+Pytorch Documentation
+
+[Pointnet](https://arxiv.org/abs/1612.00593) for Model Design and Architecture
+
+[Pytorch Forums](https://discuss.pytorch.org/t/how-to-add-noise-to-mnist-dataset-when-using-pytorch/59745/8) idea of adding Gaussian Noise and parts of code for the same.
+
+
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

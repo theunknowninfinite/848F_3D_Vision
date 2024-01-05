@@ -1,0 +1,124 @@
+                    <meta charset="utf-8" emacsmode="-*- markdown -*">
+                            **Assignment 2 : Single View to 3D**
+                            Suriya Suresh
+
+
+Exploring Loss Functions
+================
+Fitting Voxel Grid
+------------------------
+
+![Voxel Fitted]("../images/voxel_fit.gif")![Voxel GT]("../images/voxel_gt.gif")
+
+
+Fitting Point Cloud
+------------------------
+![Point Cloud Fitted]("../images/pc_fit.gif")![Point Cloud GT]("../images/pc_gt.gif")
+
+Formula for Determing the Dolly Effect
+<!-- \begin{equation}
+ \tan{ \frac{FOV}{2}}= \frac{Width}{Distance}
+\end{equation} -->
+
+Since we need width to be constant for the dolly effect, we take the ratio of the intial distance and the next distance the camera has to be placed at.
+With the FOV being known, we can find the next distance of the camera.
+
+Fitting a mesh
+------------------------
+![Mesh Fitted]("../images/mesh_fit.gif")![Mesh GT]("../images/mesh_gt.gif")
+
+
+Reconstructing 3D from single view
+===============
+
+Image to Voxel
+------------------------
+Hyper parameters Used:  iterations = 10000 batch size=1 Num_workers=4.
+The netowrk used was inspired by the paper Pix2Vox , listed in the references.
+
+![RGB Image]("../images/vox1.jpg" ) ![Voxel GT]("../images/voxgt1.gif" ) ![Voxel Prediction]("../images/vox1.gif" )
+
+![RGB Image]("../images/vox2.jpg" ) ![Voxel GT]("../images/voxgt2.gif" ) ![Voxel Prediction]("../images/vox2.gif" )
+
+![RGB Image]("../images/vox3.jpg" ) ![Voxel GT]("../images/voxgt3.gif" ) ![Voxel Prediction]("../images/vox3.gif" )
+
+Image to Point Cloud
+------------------------
+Hyper parameters Used: N_points = 10000 iterations = 5000 batch size=1 Num_workers=4
+
+![RGB Image]("../images/pt1.jpg" ) ![Point Cloud GT]("../images/ptgt1.gif" ) ![Point Cloud Prediction]("../images/pt1.gif" )
+
+![RGB Image]("../images/pt2.jpg" ) ![Point Cloud GT]("../images/ptgt2.gif" ) ![Point Cloud Prediction]("../images/pt2.gif" )
+
+![RGB Image]("../images/pt3.jpg" ) ![Point Cloud GT]("../images/ptgt3.gif" ) ![Point Cloud Prediction]("../images/pt3.gif" )
+
+
+
+Image to mesh
+------------------------
+Hyper parameters Used: N_points = 5000 iterations = 10000 batch size=1 Num_workers=4  w_smooth=1 w_chamfer=1
+
+![RGB Image]("../images/m1.jpg" ) ![Mesh GT]("../images/mgt1.gif" ) ![Mesh Prediction]("../images/m1.gif" )
+![RGB Image]("../images/m2.jpg" ) ![Mesh GT]("../images/mgt2.gif" ) ![Mesh Prediction]("../images/m2.gif" )
+![RGB Image]("../images/m3.jpg" ) ![Mesh GT]("../images/mgt3.gif" ) ![Mesh Prediction]("../images/m3.gif" )
+
+
+
+Quantitative comparisions
+------------------------
+![Point Cloud]("../images/eval_point.png" ) ![Mesh]("../images/eval_mesh.png" ) ![Voxel]("../images/eval_vox.png" )
+
+The F1 score in the ordering of decreasing value, point clouds, Mesh and Voxels.The point clouds are the easiest to optimize and learn as they do not have spatial relations with other points.
+The mesh output is less smooth to look at than the voxel output, depsite the higher F1 Score.The ground truth of the Voxels are also lower resolution and cannot be upscaled, whereas for mesh
+and point clouds, points can be sampled at a higher resolution, allowing for improvements in output.The low-res ground truth of voxels also hinders the model's ability to learn from it as
+some details can be lose due to noise within the ground truth. Despite the highest F1 score, the model does not seem top provide an good ouput visually.This could be attributed to the lack
+of references on the surface and connections to other points that can cause the mdoel to ignore such features of the images.The model could be also overfitting, resulting
+in poor generalisation ability of the model.There is also a bias in the model which can be clearly seen in the outputs.
+
+
+Hyperparameter variation
+------------------------
+
+![Weight = 1]("../images/w1.png" ) ![Weight = 4]("../images/w4.png" ) ![Weight = 7]("../images/w7.png" )
+
+
+![GT]("../images/hp_gt.gif" ) ![Weight 1]("../images/hp_1.gif" ) ![Weight 4]("../images/hp_4.gif" ) ![Weight 7]("../images/hp_7.gif" )
+
+
+
+The weight for the Mesh Smoothening Loss was tuned, from a value of default , 1 , 4 and 7. The chamfer loss was kept constant at one.The F1-score drops as the W-S increases and from
+the example gifs, the output becomes more rounded and smoother as the w_smooth increases.The potential trade-off in increasing the weight of smoothening loss that it
+begins to consider the chamfer loss with a lower magnitude affecting the F1-Score, causing it to drop significantly. The esxample gifs also show the height of the mesh increasing
+to mimic the ground truth more closely as the weight of the smoothening loss increases. The ideal tradeoff would be balancing weights of both losses.
+
+Model Interpretation
+------------------------
+Here a study into how the Image to Mesh Pipeline works was done.The model output for various iteration steps was done and visualised for each increase in iteration training of the loops.
+I was curious how most models ended looking similar in generic shape when experimenting in tuning the max_iterations for training as 10000 iterations was requiring greater computational
+time. All parameters were kept at default values as mentioned in the code except for max iterations.
+
+At lower iterations, the sphere of the source mesh can be clearly seen.
+As the iterations increase, the sphere deforms with jagged features protruding from the surface.
+When crossing 4000 iterations, the output mesh begins to assume a very generic shape of a chair with sharp edges.
+As the number of iterations increase, more source image specific features can be seen in the mesh output.
+As the mesh passed 7000, some more features were more defined in the output mesh.
+The max iterations run was 10000 which is shown in gifs in previous sections. In theory, The output will improve with number of increasing iterations until it reaches a maxima
+beyond which the risk of overfitting increases dramatically.
+
+![RGB Image]("../images/m.jpg" )  ![Mesh GT]("../images/gt.gif" )
+
+![100 iterations]("../images/100.gif" ) ![1000 iterations]("../images/1000.gif" ) ![4000 iterations]("../images/4000.gif" ) ![7000 iterations]("../images/7000.gif" )
+
+
+Credits
+================
+[848F-Assignment 2](https://github.com/848f-3DVision/assignment2) for parts of readme file ,starter code and Model architecture.
+
+Pytorch 3D documentation
+
+[Pix2Vox Research Paper for the Model Code Base of Voxel](https://arxiv.org/pdf/1901.11153.pdf)
+
+
+
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
